@@ -1,0 +1,16 @@
+
+{{#if producto.estado}}
+  <div class="producto col-12 col-md-4 text-center" id="{{producto.nombre}}" data-id="{{producto.id}}">
+
+{{else}}
+ <div class="producto seleccionado col-12 col-md-4 text-center" id="{{producto.nombre}}" data-id="{{producto.id}}">
+
+{{/if}}
+
+     <h4>{{producto.nombre}}</h4>
+  <img src="assets/img/{{producto.nombre}}.png">
+</div>
+
+
+
+

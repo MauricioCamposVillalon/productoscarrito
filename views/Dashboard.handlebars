@@ -1,0 +1,76 @@
+<br>
+<h2 class="text-center mt-1">{{mensaje}}</h2>
+
+
+<div class="row  mt-5">
+  {{#each productos}}
+
+  {{> productos
+  producto = this
+
+  }}
+
+  {{/each}}
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Productos seleccionados</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body row" id="productos">
+        {{#each productos }}
+            {{#unless this.estado }}
+
+                {{> productoscarrito
+          
+                producto = this
+
+                }}
+            {{/unless}}
+        {{/each}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  
+
+  //localStorage.setItem('productos',JSON.stringify(productos) );
+
+  // console.log(productos)
+
+  $(".producto").on("click", function (e) {
+    console.log("ingreso OK");
+  
+    console.log(this.dataset.id)  // dataset me permite traer un elemento
+    let idproducto = this.dataset.id;
+       axios.put("./productos/"+idproducto).then(respuesta =>{
+        location.reload()
+       }).catch (error => {
+          alert("HA ocurrido un error al modificar");
+       })
+    /*  let productos = JSON.parse(localStorage.getItem("productos"));
+      console.log(productos);
+      let existe = productos.find(producto => producto === this.id);
+      if(!existe){
+          productos.push(this.nombre);
+          localStorage.setItem('productos', JSON.stringify(productos));
+      }*/
+  });
+
+
+
+
+
+</script>
